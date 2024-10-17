@@ -35,11 +35,16 @@ pub fn App() -> Element {
         link { rel: "stylesheet", href: "styles.css" }
         main {
             class: "container",
-            h1 { "FnEditor" }
+
+            div { class: "topnav",
+                button { r#type: "submit", "Open File"}
+                button { r#type: "submit", "Save File"}
+                button { r#type: "submit", "New File"}
+            }
+
             p { "test" }
 
             form {
-                class: "row",
                 onsubmit: greet,
                 input {
                     id: "greet-input",
