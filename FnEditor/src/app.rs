@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
-use serde::{Deserialize, Serialize};
+//use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -10,26 +10,10 @@ extern "C" {
     async fn invoke(cmd: &str, args: JsValue) -> JsValue;
 }
 
-#[derive(Serialize, Deserialize)]
-struct GreetArgs<'a> {
-    name: &'a str,
-}
-
 pub fn App() -> Element {
-    let mut name = use_signal(|| String::new());
-    let mut greet_msg = use_signal(|| String::new());
 
-    let greet = move |_: FormEvent| async move {
-        if name.read().is_empty() {
-            return;
-        }
-
-        let name = name.read();
-        let args = serde_wasm_bindgen::to_value(&GreetArgs { name: &*name }).unwrap();
-        // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-        let new_msg = invoke("greet", args).await.as_string().unwrap();
-        greet_msg.set(new_msg);
-    };
+    //let mut filename = use_signal(|| String::new());
+    let mut file_content = use_signal(|| String::new());
 
     rsx! {
         link { rel: "stylesheet", href: "styles.css" }
@@ -37,24 +21,39 @@ pub fn App() -> Element {
             class: "container",
 
             div { class: "topnav",
-                button { r#type: "submit", "Open File"}
+                input {
+                    class: "verticalLine",
+                    r#type: "file",
+                    // pick multiple files
+                    multiple: false,
+                    onchange: move |evt| {
+                        if let Some(file_engine) = &evt.files() {
+                            let files = file_engine.files();
+                            for file_name in files {
+                                let content = std::fs::read_to_string(file_name).expect("Failed to read file");
+                                file_content.set(content); // Use .set() to update the signal
+                                //file_content = std::fs::read_to_string(file_name).unwrap();
+                                //filename.set(file_name);
+                            }
+                        }
+                    }
+                    
+                }
                 button { r#type: "submit", "Save File"}
                 button { r#type: "submit", "New File"}
             }
 
-            p { "test" }
+            p { "{file_content}" }
 
-            form {
-                onsubmit: greet,
-                input {
-                    id: "greet-input",
-                    placeholder: "Enter a name...",
-                    value: "{name}",
-                    oninput: move |event| name.set(event.value())
+            div { 
+                class: "textual_area",
+                contenteditable: true,
+                p {
+                    id: "text_content",
+                    class: "text_content",
+                    "{file_content}",
                 }
-                button { r#type: "submit", "Greet" }
             }
-            p { "{greet_msg}" }
         }
     }
 }
