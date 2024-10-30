@@ -1,0 +1,16 @@
+[package]
+name = "fneditor"
+version = "0.1.0"
+authors = ["Hadrian Lazic <59424667+had2020@users.noreply.github.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+dioxus = { version = "0.5", features = ["desktop"] }
+
+# Debug
+dioxus-logger = "0.5.1"
+log = "0.4.22"
+nfd = "0.0.4"
