@@ -1,6 +1,5 @@
-#![allow(non_snake_case)]
-
 use dioxus::prelude::*;
+//use dioxus_logger::tracing::Level; ???
 //use nfd::{open_file_dialog, Response}; // imports file dialog windows for rust cross platform
 
 // declaration of a prop
@@ -39,7 +38,7 @@ fn app() -> Element {
 
     let mut email = use_signal(|| String::from("")); // init with empty sting
     rsx! {
-        link { rel: "stylesheet", href: "main.css" } // styling link
+        link { rel: "stylesheet", href: "styles.css" } // styling link
         p {class: "white", "Testing 1 2 3" } 
         Notes {}
         Notes1 {text: "test from  struct"}
@@ -62,9 +61,16 @@ fn app() -> Element {
             }
         }
         p {class: "white","User input : {email}"}
+        div {
+            class:"container",
+            textarea {
+                class:"textarea"
+            }
+        }
     }
 }
 
 fn main() {
     launch(app)
 }
+
