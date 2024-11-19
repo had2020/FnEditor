@@ -27,8 +27,6 @@ fn app() -> Element {
     let mut filename = use_signal(|| "".to_string());
     let mut written_text = use_signal(|| "".to_string());
 
-    let mut filenames: Signal<Vec<String>> = use_signal(Vec::new);
-
     rsx! {
         link { rel: "stylesheet", href: "styles.css" } // styling link
 
@@ -52,6 +50,7 @@ fn app() -> Element {
                     "filename",
                 }
 
+
                 input {
                     // tell the input to pick a file
                     r#type: "file",
@@ -62,8 +61,10 @@ fn app() -> Element {
                     onchange: move |evt| {
                         if let Some(file_engine) = &evt.files() {
                             let files = file_engine.files();
-                            for file_name in files {
-                                filenames.write().push(file_name);
+                            for file in files {
+                                let file_reader = FileReader::new().unwrap();
+                                let file_content = file_reader.as_string().unwrap();
+                                println!("{}", file_content);
                             }
                         }
                     }
