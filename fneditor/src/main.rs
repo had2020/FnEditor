@@ -13,7 +13,6 @@ fn open_file() {
 fn app() -> Element {
     log::info!("startup log");
 
-    let mut array_strings = use_signal(|| Vec<String> = vec!)
     let mut writen_text = use_signal(|| "".to_string());
     let mut filename = use_signal(|| "".to_string());
 
@@ -22,11 +21,9 @@ fn app() -> Element {
 
         div {
             class: "container",
-
+            
             div {
                 class: "topnav",
-            
-                p {"text: {writen_text}"}
 
                 button {
                     onclick: move |_event| {
@@ -49,13 +46,14 @@ fn app() -> Element {
                     "filename",
                 }
             }
-
+            
             textarea {
                 oninput: move |event| {
                     writen_text.set(event.value());
                 },
                 class: "textarea"
             }
+
         }
     }
 }
