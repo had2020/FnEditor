@@ -5,15 +5,19 @@ use dioxus::prelude::*;
 //use std::fs::File;
 //use std::io::Write;
 
-use std::io::Read;
+//use std::io::Read;
+
+use web_sys::*;
 use web_sys::FileReader;
 
 
-fn save_file() {
-    log::info!("save");
-    //let mut file = File::create("example.txt").expect("Unable to create file");
-    //file.write_all(b"Hello, World!\n").expect("Unable to write to file");
+fn save_file(file_name: &str, content: &str) {
+    let window = web_sys::window().unwrap();
+    let blob = Blob::new_with_str(content).unwrap();
+    let url = Url::create_object_url_with_blob(&blob).unwrap();
+    window.open_with_url_and_target(&url, "_blank").unwrap();
 }
+
 
 fn open_file() {
     log::info!("save");
@@ -27,11 +31,15 @@ fn app() -> Element {
     let mut filename = use_signal(|| "".to_string());
     let mut written_text = use_signal(|| "".to_string());
 
+    let mut file_data = use_signal(|| "".to_string());
+
     rsx! {
         link { rel: "stylesheet", href: "styles.css" } // styling link
 
         div {
             class: "container",
+
+            p {}
 
             div {
                 class: "topnav",
@@ -64,7 +72,7 @@ fn app() -> Element {
                             for file in files {
                                 let file_reader = FileReader::new().unwrap();
                                 let file_content = file_reader.as_string().unwrap();
-                                println!("{}", file_content);
+                                file_data.set(file_content)
                             }
                         }
                     }
