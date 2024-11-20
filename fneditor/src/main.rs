@@ -11,11 +11,8 @@ use web_sys::*;
 use web_sys::FileReader;
 
 
-fn save_file(file_name: &str, content: &str) {
-    let window = web_sys::window().unwrap();
-    let blob = Blob::new_with_str(content).unwrap();
-    let url = Url::create_object_url_with_blob(&blob).unwrap();
-    window.open_with_url_and_target(&url, "_blank").unwrap();
+fn save_file() {
+    log::info!("thing");
 }
 
 
@@ -39,7 +36,7 @@ fn app() -> Element {
         div {
             class: "container",
 
-            p {}
+            p {"{file_data}"}
 
             div {
                 class: "topnav",
@@ -81,6 +78,8 @@ fn app() -> Element {
                 button {
                     onclick: move |_event| {
                         open_file();
+                        let file_content = std::fs::read_to_string("/Users/hadrian/Developer/Github Repos/FnEditor/Fneditor/README.md");
+                        file_data.set(file_content.unwrap());
                     },
                     "Open",
                 }
