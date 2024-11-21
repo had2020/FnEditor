@@ -1,37 +1,22 @@
 use dioxus::prelude::*;
-//use dioxus_logger::tracing::Level; ???
-//use nfd::{open_file_dialog, Response}; // imports file dialog windows for rust cross platform
 
-//use std::fs::File;
-//use std::io::Write;
-
-//use std::io::Read;
-
-use web_sys::*;
-use web_sys::FileReader;
-
-
-fn save_file(file_name: &str, content: &str) {
-    let window = web_sys::window().unwrap();
-    let blob = Blob::new_with_str(content).unwrap();
-    let url = Url::create_object_url_with_blob(&blob).unwrap();
-    window.open_with_url_and_target(&url, "_blank").unwrap();
+fn save_file() {
+    log::info!("save");
 }
 
 
 fn open_file() {
-    log::info!("save");
+    log::info!("open");
 }
 
 fn app() -> Element {
+
     log::info!("startup log");
 
     //let mut text_array: Vec<String> = vec! [String::new(); 126];
     let mut input_key = use_signal(|| "".to_string());
     let mut filename = use_signal(|| "".to_string());
     let mut written_text = use_signal(|| "".to_string());
-
-    let mut file_data = use_signal(|| "".to_string());
 
     rsx! {
         link { rel: "stylesheet", href: "styles.css" } // styling link
@@ -66,7 +51,9 @@ fn app() -> Element {
                     accept: ".txt,.rs",
                     // pick multiple files
                     multiple: false,
-                    onchange: move |evt| {
+                    onchange: move |_evt| {
+                        log::info!("sds");
+                        /* 
                         if let Some(file_engine) = &evt.files() {
                             let files = file_engine.files();
                             for file in files {
@@ -75,6 +62,7 @@ fn app() -> Element {
                                 file_data.set(file_content)
                             }
                         }
+                        */
                     }
                 }
 
