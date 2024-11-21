@@ -1,40 +1,12 @@
-use std::process::Command; // terimal commands
-use rocket::prelude::*
+#[macro_use] extern crate rocket;
 
-fn sh_command1(command:&str) {
-    let output = Command::new("sh")
-    .arg("-c")
-    .arg(command)
-    .output()
-    .expect("Failed to execute command");
-
-    println!("{}", String::from_utf8_lossy(&output.stdout));
+//http://localhost:8000/hello/John/5
+#[get("/<name>/<age>")]
+fn hello(name: &str, age: u8) -> String {
+    format!("Hello, {} year old named {}!", age, name)
 }
 
-fn main() {
-    // norm
-    /*
-    let output = Command::new("echo")
-        .arg("Hello, world!")
-        .output()
-        .expect("Failed to execute command");
-
-    println!("{}", String::from_utf8_lossy(&output.stdout));
-    */
-
-    // shell syntax
-    /* 
-    let output = Command::new("sh")
-    .arg("-c")
-    .arg("echo Hello, world!")
-    .output()
-    .expect("Failed to execute command");
-
-    println!("{}", String::from_utf8_lossy(&output.stdout));
-    */
-    sh_command1("echo running");
-    //sh_command1("mkdir test1"); any sh command works
-
-
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/hello", routes![hello])
 }
-
