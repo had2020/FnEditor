@@ -1,7 +1,17 @@
 use dioxus::prelude::*;
 
+// Client script
+use std::net::TcpStream;
+use std::io::Write;
+
+fn broadcast() {
+    let mut stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+    stream.write(b"Hello from client!").unwrap();
+}
+
 fn save_file() {
     log::info!("save");
+    broadcast();
 }
 
 
@@ -42,7 +52,6 @@ fn app() -> Element {
                     },
                     "filename",
                 }
-
 
                 input {
                     // tell the input to pick a file
