@@ -1,0 +1,12 @@
+/Users/hadrian/Developer/rust/FnEditor/fneditor/target/debug/deps/libminifb-a446658a9df285d8.rmeta: /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/lib.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/error.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/icon.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key_handler.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/mod.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/macos/mod.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/rate.rs
+
+/Users/hadrian/Developer/rust/FnEditor/fneditor/target/debug/deps/minifb-a446658a9df285d8.d: /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/lib.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/error.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/icon.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key_handler.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/mod.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/macos/mod.rs /Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/rate.rs
+
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/lib.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/error.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/icon.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/key_handler.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/mod.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/os/macos/mod.rs:
+/Users/hadrian/.cargo/registry/src/index.crates.io-6f17d22bba15001f/minifb-0.27.0/src/rate.rs:

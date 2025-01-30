@@ -1,21 +1,12 @@
 [package]
-name = "fneditor-ui"
+name = "FnEditor"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-dioxus = { version = "0.5", features = ["web"] }
-dioxus-logger = "0.5"
-wasm-bindgen = "0.2"
-wasm-bindgen-futures = "0.4"
-web-sys = "0.3.72"
-js-sys = "0.3"
-serde = { version = "1", features = ["derive"] }
-serde-wasm-bindgen = "0.6"
-log = "0.4.22"
-tauri = "2.1.1"
-reqwest = "0.12.9"
-
-[workspace]
-members = ["src-tauri"]
+freetype-rs = "0.37.0"
+laststraw = "0.1.3"
+minifb = "0.27.0"
+quote = "1.0.38"
+rusttype = "0.9.3"
+syn = { version = "2.0.92", features = ["full"] }
