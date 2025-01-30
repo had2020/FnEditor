@@ -10,21 +10,16 @@ fn main() {
             app.should_close = true;
         }
 
-        if input_pressed(&app, "space") {
-            single_line_text(&mut app, position!(20.0, 20.0, 40.0), "You pressed space");
-        }
-
-        let lines: Vec<&str> = vec!["Apple fruit", "Banana", "Cherry pie", "Oreos"];
-        multi_line_text(&mut app, position!(100.0, 100.0, 50.0), 50.0, lines);
-
         set_next_button(&mut app, position!(30.0, 30.0, 30.0)); // maybe wrap as struct
-        set_next_button_text(&mut app, "helq");
+        set_next_button_text(&mut app, "SAVE");
         button!({
-            single_line_text(
-                &mut app,
-                position!(20.0, 20.0, 40.0),
-                "You clicked the button",
-            );
+            println!("save");
+        });
+
+        set_next_button(&mut app, position!(100.0, 30.0, 30.0)); // maybe wrap as struct
+        set_next_button_text(&mut app, "LOAD");
+        button!({
+            println!("load");
         });
 
         let texty = editable_lines(
@@ -34,7 +29,7 @@ fn main() {
             "Blue",
             false,
         );
-        single_line_text(&mut app, position!(20.0, 20.0, 40.0), &texty); // you can acess the value later, will be empty, never recived input
+        single_line_text(&mut app, position!(0.0, 30.0, 40.0), &texty); // you can acess the value later, will be empty, never recived input
 
         limit_fps(&mut app, 60.0);
     });
