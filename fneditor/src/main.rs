@@ -1,10 +1,15 @@
 use laststraw::*;
 
+use std::fs::File;
+use std::io::{self, BufRead};
+
+use std::time::*;
+
 use rfd::FileDialog;
 use std::path::PathBuf;
 fn open_dialog() -> String {
     let file: Option<PathBuf> = FileDialog::new()
-        .add_filter("text", &["txt", "rs", "rtf"])
+        .add_filter("text", &["txt", "rs"])
         .add_filter("rust", &["rs", "toml"])
         .set_directory("/")
         .pick_file();
@@ -20,14 +25,32 @@ fn main() {
 
     let mut text_position_offset: f32 = 0.0;
     let mut file_path: String = String::new();
+    let mut loaded: bool = false;
+    let mut now = Instant::now();
+    let mut current_data = vec![String::new(), String::new()];
 
     asx!({
         set_window_color(&mut app, "Obsidian");
 
-        set_next_button(&mut app, position!(30.0, 30.0, 30.0)); // maybe wrap as struct
+        set_next_button(&mut app, position!(1.0, 20.0, 30.0));
         set_next_button_text(&mut app, "Open");
         button!({
-            file_path = open_dialog();
+            if !loaded {
+                loaded = true;
+                file_path = open_dialog();
+
+                let file = File::open(&file_path).unwrap();
+                let reader = std::io::BufReader::new(file);
+
+                for line in reader.lines() {
+                    println!("{}", line.unwrap());
+                }
+
+                now = Instant::now();
+            }
+            if now.elapsed() > Duration::new(0, 1) {
+                loaded = false;
+            }
         });
 
         if input_pressed(&app, "esc") {
