@@ -1,7 +1,7 @@
 use laststraw::*;
 
 use std::fs::File;
-use std::io::{self, BufRead};
+use std::io::BufRead;
 
 use std::time::*;
 
@@ -71,8 +71,8 @@ fn main() {
 
         let new_y_pos: f32 = 85.0 + text_position_offset;
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
-        let texty = editable_lines(&mut app, editable_position, "text:", "White", false);
-
+        app.multi_line_storing[1][0] = "hello".to_string();
+        let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
     });
 
