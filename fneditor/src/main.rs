@@ -42,8 +42,11 @@ fn main() {
                 let file = File::open(&file_path).unwrap();
                 let reader = std::io::BufReader::new(file);
 
+                let mut line_interation = 0;
                 for line in reader.lines() {
-                    println!("{}", line.unwrap());
+                    //println!("{}", line.unwrap());
+                    line_interation += 1;
+                    current_data[line_interation - 1] = line.unwrap();
                 }
 
                 now = Instant::now();
