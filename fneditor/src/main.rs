@@ -44,9 +44,8 @@ fn main() {
 
                 let mut line_interation = 0;
                 for line in reader.lines() {
-                    //println!("{}", line.unwrap());
-                    line_interation += 1;
-                    current_data[line_interation - 1] = line.unwrap();
+                    let line = line.unwrap();
+                    current_data.push(line);
                 }
 
                 now = Instant::now();
@@ -71,7 +70,10 @@ fn main() {
 
         let new_y_pos: f32 = 85.0 + text_position_offset;
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
-        app.multi_line_storing[1][0] = "hello".to_string();
+        //app.multi_line_storing[1][0] = "hello".to_string();
+        // putting stored text inside
+        set_next_input_init_text(&mut app, "hello");
+
         let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
     });
