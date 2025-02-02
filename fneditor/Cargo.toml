@@ -5,8 +5,9 @@ edition = "2021"
 
 [dependencies]
 freetype-rs = "0.37.0"
-laststraw = "0.1.6"
-laststraw-core = "0.1.9"
+laststraw = "0.1.9"
+#laststraw = { path = "/Users/hadrian/Developer/github_repos/laststraw/" }
+#laststraw-core = { path = "/Users/hadrian/Developer/github_repos/laststraw/packages/core" } # locally update to test changes
 minifb = "0.27.0"
 quote = "1.0.38"
 rfd = "0.15.2"

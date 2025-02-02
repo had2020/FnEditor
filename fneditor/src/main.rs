@@ -70,9 +70,10 @@ fn main() {
 
         let new_y_pos: f32 = 85.0 + text_position_offset;
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
-        //app.multi_line_storing[1][0] = "hello".to_string();
-        // putting stored text inside
-        set_next_input_init_text(&mut app, "hello");
+        // set_next_input_init_text(&mut app, "hello");
+        let lines = vec!["one", "two", "three"];
+        following_input_initial_lines(&mut app, lines);
+        //following_input_initial_text(&mut app, "lines");
 
         let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
