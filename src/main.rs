@@ -42,7 +42,8 @@ fn main() {
     let mut file_path: String = String::new();
     let mut loaded: bool = false;
     let mut now = Instant::now();
-    let mut current_data = vec![String::new(), String::new()];
+    //let mut current_data = vec![String::new(), String::new()];
+    let mut current_data = vec!["", ""];
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -59,9 +60,9 @@ fn main() {
 
                     let mut line_interation = 0;
                     for line in reader.lines() {
-                        let line = line.unwrap();
-                        current_data.push(line);
-                        println!("{:?}", current_data);
+                        let line1 = line.unwrap();
+                        let line1: &str = line.as_str();
+                        current_data.push(line1);
                     }
                 } else {
                     eprintln!("Failed to open");
@@ -89,7 +90,7 @@ fn main() {
                     let mut line_interation = 0;
                     for line in reader.lines() {
                         let line = line.unwrap();
-                        current_data.push(line); // TODO write
+                        current_data.push(&line); // TODO write
                         println!("{:?}", current_data);
                     }
                 } else {
