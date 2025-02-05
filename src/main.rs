@@ -39,13 +39,16 @@ fn main() {
                 loaded = true;
                 file_path = open_dialog();
 
-                let file = File::open(&file_path).unwrap();
-                let reader = std::io::BufReader::new(file);
+                if let Ok(file) = File::open(&file_path) {
+                    let reader = std::io::BufReader::new(file);
 
-                let mut line_interation = 0;
-                for line in reader.lines() {
-                    let line = line.unwrap();
-                    current_data.push(line);
+                    let mut line_interation = 0;
+                    for line in reader.lines() {
+                        let line = line.unwrap();
+                        current_data.push(line);
+                    }
+                } else {
+                    eprintln!("Failed to open");
                 }
 
                 now = Instant::now();
