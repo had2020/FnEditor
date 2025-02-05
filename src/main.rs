@@ -20,6 +20,19 @@ fn open_dialog() -> String {
     }
 }
 
+fn save_dialog() -> String {
+    let file: Option<PathBuf> = FileDialog::new()
+        .add_filter("text", &["txt", "rs"])
+        .add_filter("rust", &["rs", "toml"])
+        .set_directory("/")
+        .save_file();
+
+    match file {
+        Some(path) => path.to_string_lossy().to_string(),
+        None => String::new(),
+    }
+}
+
 fn main() {
     let mut app = App::new(500, 500, "test");
 
@@ -49,6 +62,32 @@ fn main() {
                     }
                 } else {
                     eprintln!("Failed to open");
+                }
+
+                now = Instant::now();
+            }
+            if now.elapsed() > Duration::new(0, 1) {
+                loaded = false;
+            }
+        });
+
+        set_next_button(&mut app, position!(80.0, 20.0, 30.0));
+        set_next_button_text(&mut app, "Save");
+        button!({
+            if !loaded {
+                loaded = true;
+                file_path = save_dialog();
+
+                if let Ok(file) = File::open(&file_path) {
+                    let reader = std::io::BufReader::new(file);
+
+                    let mut line_interation = 0;
+                    for line in reader.lines() {
+                        let line = line.unwrap();
+                        current_data.push(line);
+                    }
+                } else {
+                    eprintln!("Failed to save");
                 }
 
                 now = Instant::now();
