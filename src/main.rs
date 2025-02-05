@@ -61,6 +61,7 @@ fn main() {
                     for line in reader.lines() {
                         let line = line.unwrap();
                         current_data.push(line);
+                        println!("{:?}", current_data);
                     }
                 } else {
                     eprintln!("Failed to open");
@@ -80,7 +81,7 @@ fn main() {
                 loaded = true;
                 file_path = save_dialog();
 
-                let file_created = File::create(&file_path).unwrap();
+                File::create(&file_path).unwrap();
 
                 if let Ok(file) = File::open(&file_path) {
                     let reader = std::io::BufReader::new(file);
@@ -88,7 +89,8 @@ fn main() {
                     let mut line_interation = 0;
                     for line in reader.lines() {
                         let line = line.unwrap();
-                        current_data.push(line);
+                        current_data.push(line); // TODO write
+                        println!("{:?}", current_data);
                     }
                 } else {
                     eprintln!("Failed to save");
@@ -118,7 +120,7 @@ fn main() {
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
         // set_next_input_init_text(&mut app, "hello");
         let lines = vec!["one", "two", "three"];
-        following_input_initial_lines(&mut app, lines);
+        following_input_initial_lines(&mut app, current_data);
         //following_input_initial_text(&mut app, "lines");
 
         let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
