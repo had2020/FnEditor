@@ -5,6 +5,8 @@ use std::io::BufRead;
 
 use std::time::*;
 
+use std::io::Write;
+
 use rfd::FileDialog;
 use std::path::PathBuf;
 fn open_dialog() -> String {
@@ -77,6 +79,8 @@ fn main() {
             if !loaded {
                 loaded = true;
                 file_path = save_dialog();
+
+                let file_created = File::create(&file_path).unwrap();
 
                 if let Ok(file) = File::open(&file_path) {
                     let reader = std::io::BufReader::new(file);
