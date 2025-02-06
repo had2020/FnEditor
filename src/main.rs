@@ -82,16 +82,7 @@ fn main() {
                 loaded = true;
                 file_path = save_dialog();
 
-                std::fs::write(file_path, "test123").unwrap();
-                /*
-                File::create(&file_path).unwrap();
-
-                if let Ok(file) = File::open(&file_path) {
-                    std::fs::write(file, b"Lorem ipsum").unwrap();
-                } else {
-                    eprintln!("Failed to save");
-                }
-                */
+                std::fs::write(&file_path, "test123").unwrap();
 
                 now = Instant::now();
             }
