@@ -43,6 +43,7 @@ fn main() {
     let mut loaded: bool = false;
     let mut now = Instant::now();
     let mut current_data = vec![String::new(), String::new()];
+    let mut loaded_data: bool = false;
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -62,6 +63,7 @@ fn main() {
                         let line = line.unwrap();
                         current_data.push(line); // TODO write
                     }
+                    loaded_data = true;
                 } else {
                     eprintln!("Failed to open");
                 }
@@ -126,8 +128,9 @@ fn main() {
             grab_index += 1;
         }
 
-        following_input_initial_lines(&mut app, current_strs);
-        //following_input_initial_text(&mut app, "lines");
+        if loaded_data {
+            following_input_initial_lines(&mut app, current_strs);
+        }
 
         let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
