@@ -44,6 +44,7 @@ fn main() {
     let mut now = Instant::now();
     let mut current_data = vec![String::new(), String::new()];
     let mut loaded_data: bool = false;
+    let mut texty: String = String::new();
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -82,7 +83,22 @@ fn main() {
                 loaded = true;
                 file_path = save_dialog();
 
-                std::fs::write(&file_path, "test123").unwrap();
+                std::fs::write(&file_path, &texty).unwrap();
+                println!("{}", &texty);
+
+                /*
+                for line in text {
+                    let mut file = std::fs::OpenOptions::new()
+                        .append(true)
+                        .create(true)
+                        .open(&file_path)
+                        .unwrap();
+
+                    writeln!(file, "{}", line).unwrap();
+                    println!("{}", line);
+                }
+                println!("{:?}", text);
+                */
 
                 now = Instant::now();
             }
@@ -120,7 +136,7 @@ fn main() {
             following_input_initial_lines(&mut app, current_strs);
         }
 
-        let texty = editable_lines(&mut app, editable_position, "text:", "White", false);
+        texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
     });
 
