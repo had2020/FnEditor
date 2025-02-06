@@ -42,8 +42,7 @@ fn main() {
     let mut file_path: String = String::new();
     let mut loaded: bool = false;
     let mut now = Instant::now();
-    //let mut current_data = vec![String::new(), String::new()];
-    let mut current_data = vec!["", ""];
+    let mut current_data = vec![String::new(), String::new()];
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -60,9 +59,9 @@ fn main() {
 
                     let mut line_interation = 0;
                     for line in reader.lines() {
-                        let line1 = line.unwrap();
-                        let line1: &str = line.as_str();
-                        current_data.push(line1);
+                        let line = line.unwrap();
+                        current_data.push(line); // TODO write
+                        println!("{:?}", current_data);
                     }
                 } else {
                     eprintln!("Failed to open");
@@ -119,9 +118,14 @@ fn main() {
 
         let new_y_pos: f32 = 85.0 + text_position_offset;
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
-        // set_next_input_init_text(&mut app, "hello");
-        let lines = vec!["one", "two", "three"];
-        following_input_initial_lines(&mut app, current_data);
+
+        let mut current_strs: Vec<&str> = vec!["", ""];
+
+        for line in current_data {
+            current_strs.push(line);
+        }
+
+        following_input_initial_lines(&mut app, current_strs);
         //following_input_initial_text(&mut app, "lines");
 
         let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
