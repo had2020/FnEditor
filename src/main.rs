@@ -45,6 +45,7 @@ fn main() {
     let mut current_data = vec![String::new(), String::new()];
     let mut loaded_data: bool = false;
     let mut texty: String = String::new();
+    let mut lines_changed: Vec<&str> = vec![];
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -84,7 +85,7 @@ fn main() {
                 file_path = save_dialog();
 
                 std::fs::write(&file_path, &texty).unwrap();
-                println!("{}", &texty);
+                println!("{}", texty);
 
                 /*
                 for line in text {
@@ -137,6 +138,7 @@ fn main() {
         }
 
         texty = editable_lines(&mut app, editable_position, "text:", "White", false);
+        lines_changed.push(texty);
         limit_fps(&mut app, 60.0);
     });
 
