@@ -87,11 +87,7 @@ fn main() {
                 if let Ok(file) = File::open(&file_path) {
                     let reader = std::io::BufReader::new(file);
 
-                    let mut line_interation = 0;
-                    for line in reader.lines() {
-                        let line = line.unwrap();
-                        current_data.push(line); // TODO write
-                    }
+                    std::fs::write(reader, b"Lorem ipsum").unwrap();
                 } else {
                     eprintln!("Failed to save");
                 }
@@ -119,7 +115,7 @@ fn main() {
         let new_y_pos: f32 = 85.0 + text_position_offset;
         let editable_position: Position = position!(10.0, new_y_pos, 30.0);
 
-        let mut current_strs: Vec<&str> = vec!["", ""];
+        let mut current_strs: Vec<&str> = vec![];
 
         let mut grab_index = 0;
         for line in &current_data {
@@ -132,7 +128,7 @@ fn main() {
             following_input_initial_lines(&mut app, current_strs);
         }
 
-        let _texty = editable_lines(&mut app, editable_position, "text:", "White", false);
+        let texty = editable_lines(&mut app, editable_position, "text:", "White", false);
         limit_fps(&mut app, 60.0);
     });
 
