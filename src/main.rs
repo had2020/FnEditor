@@ -61,7 +61,6 @@ fn main() {
                     for line in reader.lines() {
                         let line = line.unwrap();
                         current_data.push(line); // TODO write
-                        println!("{:?}", current_data);
                     }
                 } else {
                     eprintln!("Failed to open");
@@ -89,7 +88,7 @@ fn main() {
                     let mut line_interation = 0;
                     for line in reader.lines() {
                         let line = line.unwrap();
-                        current_data.push(&line); // TODO write
+                        current_data.push(line); // TODO write
                         println!("{:?}", current_data);
                     }
                 } else {
@@ -121,8 +120,11 @@ fn main() {
 
         let mut current_strs: Vec<&str> = vec!["", ""];
 
+        let mut grab_index = 0;
         for line in current_data {
-            current_strs.push(line);
+            let real_line: &str = current_data[grab_index].clone().as_str();
+            current_strs.push(real_line);
+            grab_index += 1;
         }
 
         following_input_initial_lines(&mut app, current_strs);
