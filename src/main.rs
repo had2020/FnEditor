@@ -89,7 +89,6 @@ fn main() {
                     for line in reader.lines() {
                         let line = line.unwrap();
                         current_data.push(line); // TODO write
-                        println!("{:?}", current_data);
                     }
                 } else {
                     eprintln!("Failed to save");
@@ -121,8 +120,8 @@ fn main() {
         let mut current_strs: Vec<&str> = vec!["", ""];
 
         let mut grab_index = 0;
-        for line in current_data {
-            let real_line: &str = current_data[grab_index].clone().as_str();
+        for line in &current_data {
+            let real_line: &str = current_data[grab_index].as_str();
             current_strs.push(real_line);
             grab_index += 1;
         }
