@@ -60,6 +60,7 @@ fn main() {
                     let reader = std::io::BufReader::new(file);
 
                     let mut line_interation = 0;
+                    current_data = vec![String::new(), String::new()];
                     for line in reader.lines() {
                         let line = line.unwrap();
                         current_data.push(line); // TODO write
