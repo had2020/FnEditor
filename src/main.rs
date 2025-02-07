@@ -45,8 +45,6 @@ fn main() {
     let mut current_data = vec![String::new(), String::new()];
     let mut loaded_data: bool = false;
     let mut texty: String = String::new();
-    let mut lines_changed: Vec<String> = vec![];
-    let mut never_pressed_enter: bool = true;
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -87,16 +85,15 @@ fn main() {
 
                 //std::fs::write(&file_path, &texty).unwrap();
 
-                for line in lines_changed.clone() {
+                for line in app.multi_line_storing[1].clone() {
                     let mut file = std::fs::OpenOptions::new()
                         .append(true)
                         .create(true)
                         .open(&file_path)
                         .unwrap();
 
-                    writeln!(file, "{}", texty).unwrap();
+                    writeln!(file, "{}", line).unwrap();
                 }
-                println!("{:?}", texty);
 
                 now = Instant::now();
             }
@@ -134,25 +131,7 @@ fn main() {
             following_input_initial_lines(&mut app, current_strs);
         }
 
-        if app.selected_text_edit_id != 0 {
-            if never_pressed_enter {
-                if lines_changed.len() != 1 {
-                    lines_changed.push(texty.clone());
-                } else {
-                    lines_changed[0] = texty.clone();
-                }
-            }
-            if input_pressed(&app, "enter") {
-                if never_pressed_enter {
-                    never_pressed_enter = false;
-                } else {
-                    lines_changed.push(texty.clone());
-                }
-            }
-        }
         texty = editable_lines(&mut app, editable_position, "text:", "White", false);
-        println!("{:?}", lines_changed);
-        //lines_changed.push(texty.clone());
         limit_fps(&mut app, 60.0);
     });
 
