@@ -46,6 +46,7 @@ fn main() {
     let mut loaded_data: bool = false;
     let mut texty: String = String::new();
     let mut lines_changed: Vec<String> = vec![];
+    let mut never_pressed_enter: bool = true;
 
     asx!({
         set_window_color(&mut app, "Obsidian");
@@ -95,6 +96,7 @@ fn main() {
 
                     writeln!(file, "{}", texty).unwrap();
                 }
+                println!("{:?}", texty);
 
                 now = Instant::now();
             }
@@ -132,8 +134,25 @@ fn main() {
             following_input_initial_lines(&mut app, current_strs);
         }
 
+        if app.selected_text_edit_id != 0 {
+            if never_pressed_enter {
+                if lines_changed.len() != 1 {
+                    lines_changed.push(texty.clone());
+                } else {
+                    lines_changed[0] = texty.clone();
+                }
+            }
+            if input_pressed(&app, "enter") {
+                if never_pressed_enter {
+                    never_pressed_enter = false;
+                } else {
+                    lines_changed.push(texty.clone());
+                }
+            }
+        }
         texty = editable_lines(&mut app, editable_position, "text:", "White", false);
-        lines_changed.push(texty.clone());
+        println!("{:?}", lines_changed);
+        //lines_changed.push(texty.clone());
         limit_fps(&mut app, 60.0);
     });
 
