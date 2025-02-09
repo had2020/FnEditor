@@ -10,7 +10,6 @@ I was never able to create the text editor with dixous, so I created it with my 
 1. Clone the repository 🛜
    ```sh
    git clone https://github.com/had2020/FnEditor
-   cd Runo
    ```
    
 2. Run 
